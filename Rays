@@ -1,0 +1,30 @@
+library(tidyverse)
+library(ggimage)
+library(rlang)
+library(teamcolors)
+library(dplyr)
+highlight_df <- Salary_BRef %>% 
+  filter(Salary==688440366)
+ggplot(data = Salary_BRef, aes(x = Salary, y = tmWLpercent))+
+  geom_smooth(method = lm)+
+  geom_jitter()+
+  theme_classic()+
+  geom_point(data = highlight_df,
+             aes (x = Salary, y = tmWLpercent),
+             color = 'red1',
+             size = 3)+
+  labs(title = 'The Rays are Absurd',
+       subtitle = 'Total Money Spent on Roster from 2010 to 2021',
+       caption = 'graph by @Luke_Psyhogios/data via Baseball Refrence',
+       y = 'Win%', x = 'Money Spent on Roster (2010-2021)')+
+  theme(axis.title.x = element_text(size = 16), axis.title.y = element_text(size = 16))+
+  scale_x_continuous(labels = comma)+
+  geom_label(
+    label = 'Tampa Bay Rays',
+    x=788440366,
+    y=0.543,
+    label.padding = unit(0.10, 'lines'),
+    label.size = 0.45,
+    color = 'white',
+    fill = '#092c5c',
+  )
